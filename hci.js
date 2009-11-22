@@ -2,12 +2,14 @@ var hci = {};
 
 $(document).ready(function(){
   $("form").attr("action","javascript:hci.getInputToSearch()");
+
+  $.address.change(hci.handleURLChange);
 });
 
 hci.getInputToSearch = function() {
   var keywords = $("input:first").val();
   if (keywords !== '') {
-    hci.searchPipes(keywords);
+    $.address.value(keywords);
   }
 };
 
@@ -32,3 +34,20 @@ hci.displayJSON = function(data) {
   });
 };
 
+hci.handleURLChange = function(event) {
+  var term = event.value;
+  $("#results").html("");
+
+  if (term === '/') {
+    return;
+  }
+
+  var termLength = term.length;
+
+  // The default value is '/'
+  if (termLength > 1) {
+    // Strip the slash
+    // TODO: Add spinner or progress
+    hci.searchPipes(term.substring(1, (termLength - 1)));
+  }
+};
