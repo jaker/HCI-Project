@@ -6,12 +6,6 @@ body {
     color: #FFFFFF;
 }
 
-.header {
-    font-size: 300%;
-    text-align: center;
-    margin: 10% 10% 10% 10%;
-}
-
 input {
     border: 3px solid #FFFFFF;
     border-radius: 4px;
@@ -20,12 +14,22 @@ input {
 }
 
 a {
+    text-decoration: inherit;
+}
+
+.result {
     color: #FFFFFF;
 }
 
 .result:hover {
     color: #FFFFFF;
     background-color: #6EA7D0;
+}
+
+#header {
+    font-size: 300%;
+    text-align: center;
+    margin: 10% 10% 10% 10%;
 }
 
 #content {
