@@ -4,6 +4,10 @@ $(document).ready(function(){
   $("form").attr("action","javascript:hci.getInputToSearch()");
 
   $.address.change(hci.handleURLChange);
+  var data = ["heart", "brain", "pain"];
+  $("#searcher").autocomplete(data).result(function(event, item) {
+    hci.getInputToSearch();
+  });
 });
 
 hci.getInputToSearch = function() {
@@ -27,10 +31,11 @@ hci.searchPipes = function(keywords) {
 hci.displayJSON = function(data) {
   $.each(data.value.items, function(i,item){
     var aResult = $(document.createElement("div")).addClass("result");
+    var aLink = $(document.createElement("a")).attr("href", item.link);
     var aTitle = $(document.createElement("h1")).html(item.title);
     var aDescription = $(document.createElement("p")).html(item.description);
-    aResult.append(aTitle).append(aDescription);
-    $("#results").append(aResult);
+    aLink.append(aResult.append(aTitle).append(aDescription));
+    $("#results").append(aLink);
   });
 };
 
@@ -48,6 +53,6 @@ hci.handleURLChange = function(event) {
   if (termLength > 1) {
     // Strip the slash
     // TODO: Add spinner or progress
-    hci.searchPipes(term.substring(1, (termLength - 1)));
+    hci.searchPipes(term.substring(1, termLength));
   }
 };
